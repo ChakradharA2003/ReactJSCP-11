@@ -1,28 +1,61 @@
-/* Write your CSS code here. */
 .bg-container {
   background-image: linear-gradient(to right, #ffeeee, #ffc0bb);
   height: 100vh;
-  background-size: cover;
-}
-.feedback-card {
-  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+.white-card {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+}
+.question {
+  color: #0f172a;
+  font-family: 'Roboto';
+  font-size: 35px;
+  font-weight: 800;
+}
 .emoji-list {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+.emoji-style {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+.emoji-name {
+  font-family: 'Roboto';
+  color: #1e293b;
+  font-size: 15px;
+  font-weight: 400;
+  text-align: center;
+}
+.emojis-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: center;
 }
-.input-question {
+.love-emoji {
+  height: 60px;
+  width: 80px;
+}
+.thankyou-text {
   color: #0f172a;
   font-family: 'Roboto';
-  font-size: 40px;
+  font-size: 30px;
+  font-weight: 800;
 }
-.each-list {
-  display: flex;
-  flex-direction: column;
+.thankyou-below-text {
+  color: #1e293b;
+  font-family: 'Roboto';
+  font-size: 20px;
+  font-weight: 200;
+  text-align: center;
 }

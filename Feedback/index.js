@@ -1,13 +1,41 @@
-// Write your React code here.
 import {Component} from 'react'
 import './index.css'
+
+const Emoji = props => {
+  const {id, name, url, emojiClicked} = props
+  const emojiClick = () => {
+    emojiClicked(id)
+  }
+  return (
+    <li className="emoji-list">
+      <img src={url} alt={name} className="emoji-style" onClick={emojiClick} />
+      <p className="emoji-name">{name}</p>
+    </li>
+  )
+}
+
+const LoveEmojiCard = props => {
+  const {loveEmojiUrl} = props
+  return (
+    <div className="bg-container">
+      <div className="white-card">
+        <img src={loveEmojiUrl} alt="love emoji" className="love-emoji" />
+        <h1 className="thankyou-text">Thank You!</h1>
+        <p className="thankyou-below-text">
+          We will use your feedback to improve our customer support
+          <br /> performance.
+        </p>
+      </div>
+    </div>
+  )
+}
 
 class Feedback extends Component {
   state = {
     isSubmitted: false,
   }
 
-  onSubmit = () => {
+  onEmojiClicked = () => {
     this.setState({
       isSubmitted: true,
     })
@@ -16,60 +44,32 @@ class Feedback extends Component {
   render() {
     const {isSubmitted} = this.state
     const {resources} = this.props
-    const emoji = resources[0]
-    const loveEmojiUrl = resources[1]
-    let feedBack
-    if (isSubmitted === false) {
-      feedBack = (
-        <div className="feedback-card">
-          <p className="input-question">
-            How Satisfied are you with our customer support performance?
-          </p>
-          <ul className="emoji-list">
-            <li className="each-list">
-              <img
-                src={emoji[0].imageUrl}
-                alt="name"
-                className="emoji-image"
-                onClick={this.onSubmit}
+    const {emojis, loveEmojiUrl} = resources
+    console.log(emojis)
+    if (isSubmitted === true) {
+      return <LoveEmojiCard loveEmojiUrl={loveEmojiUrl} />
+    }
+    return (
+      <div className="bg-container">
+        <div className="white-card">
+          <h1 className="question">
+            How satisfied are you with our <br />
+            customer support performance?
+          </h1>
+          <ul className="emojis-container">
+            {emojis.map(each => (
+              <Emoji
+                key={each.id}
+                id={each.id}
+                url={each.imageUrl}
+                name={each.name}
+                emojiClicked={this.onEmojiClicked}
               />
-              <p className="emoji-name">{emoji[0].name}</p>
-            </li>
-            <li className="each-list">
-              <img
-                src={emoji[1].imageUrl}
-                alt="name"
-                className="emoji-image"
-                onClick={this.onSubmit}
-              />
-              <p className="emoji-name">{emoji[1].name}</p>
-            </li>
-            <li className="each-list">
-              <img
-                src={emoji[2].imageUrl}
-                alt="name"
-                className="emoji-image"
-                onClick={this.onSubmit}
-              />
-              <p className="emoji-name">{emoji[2].name}</p>
-            </li>
+            ))}
           </ul>
         </div>
-      )
-    } else {
-      feedBack = (
-        <div className="feedback-card">
-          <img src={loveEmojiUrl} alt="love emoji" className="love-emoji" />
-          <p className="thanks-para">Thank You!</p>
-          <p className="para">
-            We will use this feedback to improve our customer support
-            performance.
-          </p>
-        </div>
-      )
-    }
-
-    return <div className="bg-container">{feedBack}</div>
+      </div>
+    )
   }
 }
 export default Feedback
